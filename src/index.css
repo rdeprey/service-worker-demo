@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.firebaseui-card-content form {
+  width: 100%;
+  justify-content: center;
+}
+
+.MuiAppBar-root {
+  height: 50px;
+  text-align: left;
+  box-sizing: border-box;
+  flex-direction: row!important;
+  margin-bottom: 30px;
+}
+
+.MuiAppBar-root .wrapper {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.wrapper .MuiChip-root, .wrapper h6 {
+  align-self: center;
+}
+
+.MuiAppBar-colorPrimary {
+  justify-content: center;
+}
+
+.MuiListItem-root {
+  max-width: 50%;
+  margin: 10px auto;
+  background: #cccccc;
+}
+
+.MuiChip-root {
+  padding: 15px!important;
+}
+
+#add-book {
+  background-color: green;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 33px;
+  height: 30px;
+  align-self: center;
+}
+
+.MuiSvgIcon-root {
+  font-size: 1.2rem!important;
+}
+
+form {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.MuiFormControl-root {
+  width: 65%;
+  justify-content: flex-start;
+  margin-right: 10px!important;
+}
