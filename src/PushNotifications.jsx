@@ -8,16 +8,16 @@ import UpdateNotificationBar from './UpdateNotificationBar';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
+import classnames from 'classnames';
 
 export default class PushNotifications extends React.Component {
-  pushBtn = null;
-
   constructor(props) {
       super(props);
       this.state = {
         isSubscribed: false,
         userToken: null,
         notificationMessage: '',
+        notSupported: false,
       };
   }
 
@@ -59,7 +59,6 @@ subscribeUser = async () => {
             userToken: messagingToken,
             isSubscribed: true,
           });
-          this.updateBtn();
         }
       } else {
         // Show permission request.
@@ -90,14 +89,8 @@ subscribeUser = async () => {
           userToken: null,
         });
         localStorage.removeItem('pushNotificationsKey');
-        this.updateBtn();
       }
   };
-
-  updateBtn = () => {
-    this.pushBtn.textContent = this.state.isSubscribed ? 'Unsubscribe' : 'Subscribe';
-    this.pushBtn.disabled = false;
-   }
 
   initializePush = () => {
     const userToken = localStorage.getItem('pushNotificationsKey');
@@ -105,7 +98,6 @@ subscribeUser = async () => {
         userToken: userToken,
         isSubscribed: userToken !== null,
     });
-    this.updateBtn();
   };
 
   handleClick = () => {
@@ -124,8 +116,6 @@ subscribeUser = async () => {
     // If both are supported, register the service worker
     document.addEventListener('DOMContentLoaded', () => {
         if ('serviceWorker' in navigator && 'PushManager' in window) {
-          this.pushBtn = document.getElementById('pushBtn');
-
           navigator.serviceWorker.register('./firebase-messaging-sw.js')
             .then(function (registration) {
                 firebase.messaging().useServiceWorker(registration);
@@ -143,8 +133,14 @@ subscribeUser = async () => {
               });
             });
         } else {
-            this.pushBtn.textContent = 'Push not supported.'
+          this.setState({
+            notSupported: true,
+          });
         }
+    });
+
+    const subscribeBtnClassnames = classnames({
+      'subscribe-button--hidden': this.state.notSupported
     });
 
     // Render the UI
@@ -156,9 +152,9 @@ subscribeUser = async () => {
                 Summer Reading List
               </Typography>
               <Chip
-                label="Subscribe"
+                label={this.state.isSubscribed ? 'Unsubscribe' : 'Subscribe'}
                 onClick={this.handleClick}
-                id="pushBtn"
+                className={subscribeBtnClassnames}
                 color={this.state.isSubscribed ? "primary" : "secondary"}
               />
             </div>
