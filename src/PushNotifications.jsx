@@ -21,6 +21,7 @@ export default class PushNotifications extends React.Component {
       };
   }
 
+// Handle subscribes to push notifications
 subscribeUser = async () => {
   try {
     const permission = await Notification.requestPermission();
@@ -73,6 +74,7 @@ subscribeUser = async () => {
     };
   };
 
+  // Handle unsubscribes from push notifications
   unsubscribeUser = async () => {
     const deletedStatus = await firebase.messaging().deleteToken(this.state.userToken)
       .then(async () => {
@@ -92,6 +94,7 @@ subscribeUser = async () => {
       }
   };
 
+  // Set initial UI state
   initializePush = () => {
     const userToken = localStorage.getItem('pushNotificationsKey');
     this.setState({
@@ -100,6 +103,7 @@ subscribeUser = async () => {
     });
   };
 
+  // Handle interactions with subscribe button
   handleClick = () => {
     if (this.state.isSubscribed) {
       return this.unsubscribeUser();
