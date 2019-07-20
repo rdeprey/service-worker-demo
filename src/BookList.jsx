@@ -7,7 +7,6 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import TextField from '@material-ui/core/TextField';
-import PlusIcon from '@material-ui/icons/Add';
 
 export default class BookList extends React.Component {
     constructor(props) {
@@ -61,12 +60,12 @@ export default class BookList extends React.Component {
                 <form action="#">
                 <TextField
                     id="input-title"
-                    label="Add a Book"
+                    label="Book Title"
                     variant="outlined"
                     margin="dense"
                     inputRef={this.newBook}
                 />
-                <button type="submit" id="add-book" onClick={this.addBook}><PlusIcon /></button>
+                <button type="submit" id="add-book" onClick={this.addBook}>Add book</button>
             </form>
 
             <div className="bookList">

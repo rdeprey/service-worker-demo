@@ -19,6 +19,23 @@ function App() {
     appId: process.env.REACT_APP_FIREBASE_APP_ID,
   });
 
+  firebase.firestore().enablePersistence()
+  .then(function(res) {
+    console.log(res);
+  })
+  .catch(function(err) {
+    console.log(err);
+      if (err.code === 'failed-precondition') {
+          // Multiple tabs open, persistence can only be enabled
+          // in one tab at a a time.
+          // ...
+      } else if (err.code === 'unimplemented') {
+          // The current browser does not support all of the
+          // features required to enable persistence
+          // ...
+      }
+  });
+
   const render = () => {
       return (
         <div className="App">

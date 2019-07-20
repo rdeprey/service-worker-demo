@@ -95,16 +95,11 @@ subscribeUser = async () => {
   };
 
   updateBtn = () => {
-    if (Notification.permission === 'denied') {
-        this.pushBtn.textContent = 'Subscription blocked';
-        return;
-    }
-
     this.pushBtn.textContent = this.state.isSubscribed ? 'Unsubscribe' : 'Subscribe';
     this.pushBtn.disabled = false;
    }
 
-   initializePush = () => {
+  initializePush = () => {
     const userToken = localStorage.getItem('pushNotificationsKey');
     this.setState({
         userToken: userToken,

@@ -27,14 +27,6 @@ exports.sendBookNotification = functions.firestore.document('books/{title}').onW
                   title: 'New Book!',
                   body: `Check out '${bookTitle}'`,
                 },
-                webpush: {
-                    notification: {
-                        requireInteraction: true,
-                    },
-                    fcm_options: {
-                        link: 'http://localhost:3000/notifications'
-                    }
-                },
             };
             
             // Send push notifications to each subscribed device

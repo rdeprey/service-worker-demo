@@ -55,10 +55,10 @@ code {
   background-color: green;
   color: #ffffff;
   border: none;
-  border-radius: 50%;
-  width: 33px;
-  height: 30px;
+  padding: 10px;
+  font-size: 1rem;
   align-self: center;
+  border-radius: 5px;
 }
 
 .MuiSvgIcon-root {
