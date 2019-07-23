@@ -39,18 +39,20 @@ exports.sendBookNotification = functions.firestore.document('books/{title}').onW
                         const error = result.error;
                       
                         if (error) {
-                          console.error('Failed delivery to', token, error);
+                            console.error('Failed delivery to', token, error);
+
+                            if (error.code === 'messaging/invalid-registration-token' ||
+                                error.code === 'messaging/registration-token-not-registered') {
+
+                                db.collection('device_ids').doc(childSnapshot.id).delete();
+                                console.info('Was removed:', token)
+                            } 
+
+                            return;
                         }
-                      
-                        if (error.code === 'messaging/invalid-registration-token' ||
-                            error.code === 'messaging/registration-token-not-registered') {
-                      
-                            childSnapshot.ref.remove();
-                            console.info('Was removed:', token)
-                        } else {
-                          console.info('Notification sent to', token);
-                        }
-                      });
+                        
+                        console.info('Notification sent to', token);
+                    });
                     return;
                 })
                 .catch(err => {
