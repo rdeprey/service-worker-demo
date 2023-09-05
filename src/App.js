@@ -1,29 +1,38 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { initializeApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PushNotifications from './PushNotifications';
-import Authentication from './Authentication';
+import { firebaseConfig } from './firebaseConfig';
+import './App.css';
+
+export const app = initializeApp(firebaseConfig);
 
 function App() {
-  const render = () => {
-      return (
-        <div className="App">
-          <Router>
-            <Switch>
+  const [authenticatedUser, setAuthenticatedUser] = useState(null);
 
-              <Route 
-                exact={true}
-                path="/"
-                render={(props) => <Authentication />}
-              />
-              <Route 
-                path="/notifications"
-                render={(props) => <PushNotifications />}
-              />
-            </Switch>
-          </Router>
-        </div>
-      );
+  useEffect(() => {
+    if (!authenticatedUser) {
+      const auth = getAuth(app);
+      signInWithPopup(auth, new GoogleAuthProvider()).then((result) => {
+        setAuthenticatedUser({
+          user: result.user,
+          token: GoogleAuthProvider.credentialFromResult(result).accessToken
+        });
+      });
+    }
+  }, [authenticatedUser]);
+
+  const render = () => {
+    return (
+      <div className='App'>
+        <Router>
+          <Routes>
+            <Route path='/' element={<PushNotifications />} />
+          </Routes>
+        </Router>
+      </div>
+    );
   };
 
   return render();
