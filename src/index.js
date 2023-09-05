@@ -8,7 +8,7 @@ import { initializeFirestore } from 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/messaging';
 import App, { app } from './App';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './service-worker';
 import './index.css';
 
 // Enable Firestore database persistence so database can be queried/used offline

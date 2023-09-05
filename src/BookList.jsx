@@ -36,7 +36,7 @@ export default function BookList() {
       .catch((err) => {
         console.log("Couldn't get book list: " + err);
       });
-  }, [getBookList]);
+  }, []);
 
   const addBook = (event) => {
     const bookTitle = newBook.current.value;
