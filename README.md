@@ -26,6 +26,8 @@ You can run the React app locally to try the demo. It's using React 18.
 
 You will need to enable push notifications for the localhost URL in your browser in order for the demo to work.
 
+If you decide to host the application with Firebase Hosting, update the `.firebaserc` file to reference your project.
+
 ### Running the Firebase Cloud Function
 
 The Cloud Function uses Node 18.
